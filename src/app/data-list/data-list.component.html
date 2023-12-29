@@ -1,0 +1,13 @@
+<div>
+    <table>
+        <tr *ngfor="let el in data">
+            <td>lol</td>
+        </tr>
+    </table>
+    <button (click)="onAddData(dataType)">
+        Dodaj 
+        <span *ngIf="dataType=='employee'">Pracownika</span>
+        <span *ngIf="dataType=='task'">Zadanie</span>
+        <span *ngIf="dataType=='team'">Zespół</span>
+    </button>
+</div>

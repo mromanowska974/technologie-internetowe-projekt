@@ -1,0 +1,51 @@
+<div *ngIf="dataType=='employee'">
+    <div>
+        <div>
+            <label>Imię</label>
+            <input>
+        </div>
+        <div>
+            <label>Nazwisko</label>
+            <input>
+        </div>
+        <div>
+            <label>Stanowisko</label>
+            <input>
+        </div>
+        <div>
+            <label>E-mail</label>
+            <input>
+        </div>
+        <div>
+            <label>Hasło</label>
+            <input type="password">
+        </div>
+        <button>Dodaj</button>
+    </div>
+</div>
+<div *ngIf="dataType=='task'">
+    <div>
+        <label>Nazwa</label>
+        <input>
+    </div>
+    <div>
+        <label>Zespół</label>
+        <select>
+            <option>Zespol 1</option>
+        </select>
+    </div>
+    <button>Dodaj</button>
+</div>
+<div *ngIf="dataType=='team'">
+    <div>
+        <label>Nazwa</label>
+        <input>
+    </div>
+    <div>
+        <label>Członkowie:</label>
+        <li>
+            <input type="checkbox">
+        </li>
+    </div>
+    <button>Dodaj</button>
+</div>
