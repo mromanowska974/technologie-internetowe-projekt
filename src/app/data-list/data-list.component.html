@@ -1,8 +1,33 @@
 <div>
     <table>
-        <tr *ngfor="let el in data">
-            <td>lol</td>
-        </tr>
+        <div *ngIf="dataType=='employee'">
+            <tr *ngFor="let el of data; let i = index">
+                <td>{{i}}</td>
+                <td>{{el.name}}</td>
+                <td>{{el.surname}}</td>
+                <td>{{el.position}}</td>
+                <td>{{el.email}}</td>
+            </tr>
+        </div>
+        <div *ngIf="dataType=='task'">
+            <tr *ngFor="let el of data; let i = index">
+                <td>{{i}}</td>
+                <td>{{el.content}}</td> 
+            </tr>
+        </div>
+        <div *ngIf="dataType=='team' && isManager==='true'">
+            <tr *ngFor="let el of data; let i = index">
+                <td>{{i}}</td>
+                <td>{{el.name}}</td>               
+            </tr>
+        </div>
+        <div *ngIf="dataType=='team' && isManager==='false'">
+            <tr *ngFor="let el of data; let i = index">
+                <td>{{i}}</td>
+                <td>{{el.name}}</td>   
+                <td>{{el.surname}}</td>               
+            </tr>
+        </div>
     </table>
     <button (click)="onAddData(dataType)">
         Dodaj 

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { DataService } from '../data.service';
+import { Employee } from '../models/employee';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,24 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  email: String = '';
-  password: String = '';
+  email: string = '';
+  password: string = '';
 
-  constructor(private router: Router){
+  dataService: DataService = inject(DataService);
 
-  }
+  constructor(private router: Router){}
 
   onLogIn(){
-    if(this.email=='admin' && this.password=='admin'){
-        this.router.navigate(['/main-page']);
+    let user: Employee | undefined = this.dataService.getEmployeeByEmail(this.email)
+    console.log(user)
+
+    if(user !== undefined && this.email==user.email && this.password==user.password){
+      if(user.position==='Kierownik'){
+        this.router.navigate(['/main-page'], {queryParams: {manager: true, user: user.email}});
+      }
+      else{
+        this.router.navigate(['/main-page'], {queryParams: {manager: false, user: user.email}});
+      }
     }
   }
 }

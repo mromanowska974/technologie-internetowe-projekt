@@ -2,50 +2,55 @@
     <div>
         <div>
             <label>Imię</label>
-            <input>
+            <input [(ngModel)]="data.name">
         </div>
         <div>
             <label>Nazwisko</label>
-            <input>
+            <input [(ngModel)]="data.surname">
         </div>
         <div>
             <label>Stanowisko</label>
-            <input>
+            <select [(ngModel)]="data.position">
+                <option>Kierownik</option>
+                <option>Pracownik</option>
+            </select>
         </div>
         <div>
             <label>E-mail</label>
-            <input>
+            <input [(ngModel)]="data.email">
         </div>
         <div>
             <label>Hasło</label>
-            <input type="password">
+            <input type="password" [(ngModel)]="data.password">
         </div>
-        <button>Dodaj</button>
+        <button (click)="onAddData()">Dodaj</button>
     </div>
 </div>
 <div *ngIf="dataType=='task'">
     <div>
         <label>Nazwa</label>
-        <input>
+        <input [(ngModel)]="data.content">
     </div>
     <div>
         <label>Zespół</label>
-        <select>
-            <option>Zespol 1</option>
+        <select [(ngModel)]="selectedTeam">
+            <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}</option>
         </select>
     </div>
-    <button>Dodaj</button>
+    <button (click)="onAddData()">Dodaj</button>
 </div>
 <div *ngIf="dataType=='team'">
     <div>
         <label>Nazwa</label>
-        <input>
+        <input [(ngModel)]="data.name">
     </div>
     <div>
         <label>Członkowie:</label>
-        <li>
-            <input type="checkbox">
-        </li>
+        <ul>
+            <li *ngFor="let employee of employees">
+                <input type="checkbox" name="employee" [value]="employee" #item (change)="onEmployeeClicked(employee, item)"> {{ employee.name + ' ' + employee.surname}}
+            </li>
+        </ul>
     </div>
-    <button>Dodaj</button>
+    <button (click)="onAddData()">Dodaj</button>
 </div>

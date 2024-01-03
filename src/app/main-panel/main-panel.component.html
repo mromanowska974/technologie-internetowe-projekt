@@ -1,8 +1,15 @@
 <div>
     <div>
-        <a routerLink="employees">Pracownicy</a>
-        <a routerLink="tasks">Zadania</a>
-        <a routerLink="teams">Zespoły</a>
+        <button (click)="logOut()">Wyloguj się</button>
+    </div>
+    <div *ngIf="isManager==='true'">
+        <a routerLink="employees" [queryParams]="{manager: isManager, user: user}">Pracownicy</a>
+        <a routerLink="tasks" [queryParams]="{manager: isManager, user: user}">Zadania</a>
+        <a routerLink="teams" [queryParams]="{manager: isManager, user: user}">Zespoły</a>
+    </div>
+    <div *ngIf="isManager==='false'">
+        <a routerLink="tasks" [queryParams]="{manager: isManager, user: user}">Moje Zadania</a>
+        <a routerLink="teams" [queryParams]="{manager: isManager, user: user}">Mój Zespół</a>
     </div>
     <router-outlet></router-outlet>
 </div>

@@ -17,26 +17,40 @@ export class DataListComponent implements OnInit{
 
   dataService: DataService = inject (DataService);
 
-  constructor(private router: Router){
-    
-  }
+  isManager: string;
+  user: string;
+
+  constructor(private route: Router, private router: ActivatedRoute){}
 
   ngOnInit(){
-    if(this.router.url=='/main-page/employees' || this.router.url=='/main-page'){
+    this.router.queryParams.subscribe(params => {
+      this.isManager = params['manager'];
+      this.user = params['user'];
+    });
+
+    if(this.route.url.includes('employees')){
       this.dataType = Type.EMPLOYEE
-      this.data = this.dataService.employees
+      this.data = this.dataService.getAllEmployees()
     }
-    else if(this.router.url=='/main-page/tasks'){
+    else if(this.route.url.includes('tasks') && this.isManager==='true'){
       this.dataType = Type.TASK
-      this.data = this.dataService.tasks
+      this.data = this.dataService.getAllTasks()
     }
-    else if(this.router.url=='/main-page/teams'){
+    else if(this.route.url.includes('tasks') && this.isManager==='false'){
+      this.dataType = Type.TASK
+      this.data = this.dataService.getTasksByUser(this.user);
+    }
+    else if(this.route.url.includes('teams') && this.isManager==='true'){
       this.dataType = Type.TEAM
-      this.data = this.dataService.teams
+      this.data = this.dataService.getAllTeams()
+    }
+    else if(this.route.url.includes('teams') && this.isManager==='false'){
+      this.dataType = Type.TEAM
+      this.data = this.dataService.getTeamByUser(this.user)?.employees!;
     }
   }
 
   onAddData(dataType: Type){
-    this.router.navigate(['/add-data', dataType.toString()])
+    this.route.navigate(['/add-data', dataType.toString()])
   }
 }
