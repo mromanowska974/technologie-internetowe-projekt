@@ -21,9 +21,10 @@
         </div>
         <div>
             <label>Hasło</label>
-            <input type="password" [(ngModel)]="data.password">
+            <input type="password" [(ngModel)]="hashedPassword">
         </div>
-        <button (click)="onAddData()">Dodaj</button>
+        <button *ngIf="mode==='Add'" (click)="onAddData()">Dodaj</button>
+        <button *ngIf="mode==='Edit'" (click)="onEditData()">Edytuj</button>
     </div>
 </div>
 <div *ngIf="dataType=='task'">
@@ -37,7 +38,8 @@
             <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}</option>
         </select>
     </div>
-    <button (click)="onAddData()">Dodaj</button>
+    <button *ngIf="mode==='Add'" (click)="onAddData()">Dodaj</button>
+    <button *ngIf="mode==='Edit'" (click)="onEditData()">Edytuj</button>
 </div>
 <div *ngIf="dataType=='team'">
     <div>
@@ -52,5 +54,6 @@
             </li>
         </ul>
     </div>
-    <button (click)="onAddData()">Dodaj</button>
+    <button *ngIf="mode==='Add'" (click)="onAddData()">Dodaj</button>
+    <button *ngIf="mode==='Edit'" (click)="onEditData()">Edytuj</button>
 </div>

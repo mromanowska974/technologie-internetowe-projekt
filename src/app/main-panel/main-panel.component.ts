@@ -13,7 +13,8 @@ export class MainPanelComponent implements OnInit{
   isManager: string;
   user: string;
 
-  constructor(public route: Router, private router: ActivatedRoute){}
+  constructor(public route: Router, 
+    private router: ActivatedRoute){}
 
   ngOnInit(): void {
     this.router.queryParams.subscribe(params => {

@@ -1,0 +1,24 @@
+<div>
+    <div *ngIf="dataType==='employee'">
+        <h2>{{data.name+' '+data.surname}}</h2>
+        <p>{{data.position}}</p>
+        <p>{{data.email}}</p>
+        <button *ngIf="isManager==='true'" (click)="onEditData()">Edytuj pracownika</button>
+        <button *ngIf="isManager==='true'" (click)="onDeleteData()">Usuń pracownika</button>
+    </div>
+    <div *ngIf="dataType==='task'">
+        <h2>{{data.content}}</h2>
+        <p>{{data.status}}</p>
+        <p>Tu powinna być nazwa zespołu</p>
+        <button *ngIf="isManager==='true'" (click)="onEditData()">Edytuj zadanie</button>
+        <button *ngIf="isManager==='true'" (click)="onDeleteData()">Usuń zadanie</button>
+    </div>
+    <div *ngIf="dataType==='team'">
+        <h2>{{data.name}}</h2>
+        <ul *ngFor="let e of data.employees">
+            <li>{{e.name+' '+e.surname}}</li>
+        </ul>
+        <button *ngIf="isManager==='true'" (click)="onEditData()">Edytuj zespół</button>
+        <button *ngIf="isManager==='true'" (click)="onDeleteData()">Usuń zespół</button>
+    </div>
+</div>

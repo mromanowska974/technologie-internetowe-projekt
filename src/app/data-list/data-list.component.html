@@ -1,35 +1,39 @@
 <div>
-    <table>
         <div *ngIf="dataType=='employee'">
-            <tr *ngFor="let el of data; let i = index">
-                <td>{{i}}</td>
-                <td>{{el.name}}</td>
-                <td>{{el.surname}}</td>
-                <td>{{el.position}}</td>
-                <td>{{el.email}}</td>
-            </tr>
+            <div *ngFor="let el of data; let i = index">
+                <a routerLink="/details" [queryParams]='{email: el.email, isManager: isManager}'>
+                    {{i}}
+                    {{el.name}}
+                    {{el.surname}}
+                </a>
+            </div>
         </div>
         <div *ngIf="dataType=='task'">
-            <tr *ngFor="let el of data; let i = index">
-                <td>{{i}}</td>
-                <td>{{el.content}}</td> 
-            </tr>
+            <div *ngFor="let el of data; let i = index">
+                <a routerLink="/details" [queryParams]='{content: el.content, isManager: isManager}'>
+                    {{i}}
+                    {{el.content}}
+                </a> 
+            </div>
         </div>
         <div *ngIf="dataType=='team' && isManager==='true'">
-            <tr *ngFor="let el of data; let i = index">
-                <td>{{i}}</td>
-                <td>{{el.name}}</td>               
-            </tr>
+            <div *ngFor="let el of data; let i = index">
+                <a routerLink="/details" [queryParams]='{name: el.name, isManager: isManager}'>
+                    {{i}}
+                    {{el.name}}
+                </a>               
+            </div>
         </div>
         <div *ngIf="dataType=='team' && isManager==='false'">
-            <tr *ngFor="let el of data; let i = index">
-                <td>{{i}}</td>
-                <td>{{el.name}}</td>   
-                <td>{{el.surname}}</td>               
-            </tr>
+            <div *ngFor="let el of data; let i = index">
+                <a routerLink="/details" [queryParams]='{email: el.email, isManager: isManager}'>
+                    {{i}}
+                    {{el.name}}  
+                    {{el.surname}}
+                </a>               
+            </div>
         </div>
-    </table>
-    <button (click)="onAddData(dataType)">
+    <button *ngIf="isManager==='true'" (click)="onAddData(dataType)">
         Dodaj 
         <span *ngIf="dataType=='employee'">Pracownika</span>
         <span *ngIf="dataType=='task'">Zadanie</span>
